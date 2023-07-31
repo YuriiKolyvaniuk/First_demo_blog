@@ -1,0 +1,30 @@
+<div th:fragment="footer">
+    <footer class="py-5 text-center text-body-secondary bg-body-tertiary">
+
+        <script>
+
+            function scrollToTop() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }
+
+            window.addEventListener('scroll', function () {
+                let scrollToTopBtn = document.getElementById('scrollToTopBtn');
+                if (window.scrollY > 300) {
+                    scrollToTopBtn.classList.add('show');
+                } else {
+                    scrollToTopBtn.classList.remove('show');
+                }
+            });
+
+
+        </script>
+
+
+        <p>Demo blog using <a href="https://getbootstrap.com/">Bootstrap</a>, by <a
+                href="https://github.com/YuriiKolyvaniuk">Yurii Kolyvaniuk</a>.</p>
+        <button id="scrollToTopBtn" onclick="scrollToTop()" class="btn btn-primary">Scroll to Top</button>
+    </footer>
+</div>
