@@ -74,14 +74,14 @@ public class BlogController {
     }
 
     @PostMapping("/edit/{id}")
-    public String blogPostUpdate(@PathVariable(value = "id") long id, @RequestParam String title, @RequestParam String topic, @RequestParam String full_text
+    public String blogPostUpdate(@PathVariable(value = "id") long id, @RequestParam String title, @RequestParam String topic, @RequestParam String fullText
             , Model model){
 
         Post post = postService.getPost(id);
 
         post.setTitle(title);
         post.setTopic(topic);
-        post.setFullText(full_text);
+        post.setFullText(fullText);
 
         postService.savePost(post);
 

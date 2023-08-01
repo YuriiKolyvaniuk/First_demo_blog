@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface PostRepository extends JpaRepository<Post,Long> {
     public List<Post> findAllByTopic(String topic);
-    List<Post> findAllByTitleContainingIgnoreCaseOrTopicContainingIgnoreCase(String query, String query1);
+    public List<Post> findAllByTitleContainingIgnoreCaseOrTopicContainingIgnoreCase(String query, String query1);
 }
