@@ -14,11 +14,12 @@ import java.util.*;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService{
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+
+    private final UserRepository userRepository;
+
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public List<User> getAllUsers() {

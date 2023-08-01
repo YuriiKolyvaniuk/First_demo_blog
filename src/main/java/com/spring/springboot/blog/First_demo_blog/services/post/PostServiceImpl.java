@@ -2,6 +2,8 @@ package com.spring.springboot.blog.First_demo_blog.services.post;
 
 import com.spring.springboot.blog.First_demo_blog.models.Post;
 import com.spring.springboot.blog.First_demo_blog.repo.PostRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,10 +11,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
+@RequiredArgsConstructor
 public class PostServiceImpl implements PostService{
 
-    @Autowired
-    private PostRepository postRepository;
+
+    private final PostRepository postRepository;
 
     @Override
     public List<Post> getAllPosts() {

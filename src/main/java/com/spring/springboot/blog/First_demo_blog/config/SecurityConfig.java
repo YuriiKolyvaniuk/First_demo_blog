@@ -10,28 +10,28 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.JdbcUserDetailsManager;
-import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.sql.DataSource;
 
 @Configuration
-@EnableWebSecurity
+@EnableMethodSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
 
-    @Autowired
-    private DataSourceProperties dataSourceProperties;
-    @Autowired
-    private CustomUserDetailsService userDetailsService;
+
+//    private final DataSourceProperties dataSourceProperties;
+
+//    private final CustomUserDetailsService userDetailsService;
 
     @Bean
-    public DataSource dataSource() {
+    public DataSource dataSource(DataSourceProperties dataSourceProperties) {
         return dataSourceProperties.initializeDataSourceBuilder().build();
     }
 
@@ -40,12 +40,14 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
         return authConfig.getAuthenticationManager();
     }
+
     @Bean
-    public AuthenticationProvider authenticationProvider() {
+    public AuthenticationProvider authenticationProvider(UserDetailsService userDetailsService) {
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
         daoAuthenticationProvider.setUserDetailsService(userDetailsService);
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
@@ -53,10 +55,10 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
+    public SecurityFilterChain filterChain(HttpSecurity http, UserDetailsService userDetailsService) throws Exception{
         http
                 .csrf().disable()
-                .authenticationProvider(authenticationProvider())
+                .authenticationProvider(authenticationProvider(userDetailsService))
                         .authorizeHttpRequests((authorize) -> authorize
                                 .requestMatchers( "/blog/add/**").hasAnyRole("USER","ADMIN","MODERATOR")
                                 .requestMatchers("/blog/edit/**", "/blog/remove/**").hasAnyRole("ADMIN","MODERATOR")
@@ -68,6 +70,8 @@ public class SecurityConfig {
                 .headers().frameOptions().disable()
                 .and()
                 .httpBasic();
+
+        http.authenticationProvider(authenticationProvider(userDetailsService));
 
 //        UserDetailsManager userDetailsManager = users(dataSource(), passwordEncoder());
 //        http.userDetailsService(userDetailsManager);

@@ -2,6 +2,7 @@ package com.spring.springboot.blog.First_demo_blog.controllers;
 
 import com.spring.springboot.blog.First_demo_blog.models.Post;
 import com.spring.springboot.blog.First_demo_blog.services.post.PostService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,14 +16,15 @@ import java.util.List;
 @Controller
 @RequestMapping("/blog")
 @Validated
+@RequiredArgsConstructor
 public class BlogController {
 
     private static final List<String> TOPICS = Arrays.asList("World", "Technology", "Design"
             , "Culture", "Business", "Politics", "Opinion"
             , "Science", "Health", "Style", "Travel", "Other");
 
-    @Autowired
-    private PostService postService;
+
+    private final PostService postService;
 
     @GetMapping
     public String blogMain(Model model){
