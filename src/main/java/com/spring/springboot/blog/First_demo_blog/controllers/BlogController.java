@@ -3,7 +3,6 @@ package com.spring.springboot.blog.First_demo_blog.controllers;
 import com.spring.springboot.blog.First_demo_blog.models.Post;
 import com.spring.springboot.blog.First_demo_blog.services.post.PostService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -82,7 +81,7 @@ public class BlogController {
 
         post.setTitle(title);
         post.setTopic(topic);
-        post.setFull_text(full_text);
+        post.setFullText(full_text);
 
         postService.savePost(post);
 

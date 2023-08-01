@@ -22,7 +22,7 @@ public class Post {
 
     @Column(name = "full-text")
     @Size(min = 25, message = "Full text must be at least 25 characters!")
-    private String full_text;
+    private String fullText;
 
     @Column(name = "good-grade")
     private int goodGrade;
@@ -33,10 +33,10 @@ public class Post {
     public Post() {
     }
 
-    public Post(String title, String topic, String full_text) {
+    public Post(String title, String topic, String fullText) {
         this.title = title;
         this.topic = topic;
-        this.full_text = full_text;
+        this.fullText = fullText;
     }
 
     public Long getId() {
@@ -63,12 +63,12 @@ public class Post {
         this.topic = topic;
     }
 
-    public String getFull_text() {
-        return full_text;
+    public String getFullText() {
+        return fullText;
     }
 
-    public void setFull_text(String full_text) {
-        this.full_text = full_text;
+    public void setFullText(String fullText) {
+        this.fullText = fullText;
     }
 
     public int getGoodGrade() {
