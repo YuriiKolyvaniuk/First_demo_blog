@@ -80,7 +80,7 @@
                                                                       class="bad_feedback"/>
             </div>
 
-            <div sec:authorize="hasAnyRole('ADMIN', 'MODERATOR')">
+            <div sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')">
                 <a th:href="'/blog/edit/' + ${post.id}" class="btn btn-warning">Edit</a>
                 <form th:action="'/blog/remove/' + ${post.id}" method="post" style="display: inline-block;">
                     <button class="btn btn-danger" type="submit">Delete</button>

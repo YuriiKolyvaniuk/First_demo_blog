@@ -1,5 +1,6 @@
 package com.spring.springboot.blog.First_demo_blog.services.post;
 
+import com.spring.springboot.blog.First_demo_blog.dto.BlogPostUpdateRequest;
 import com.spring.springboot.blog.First_demo_blog.models.Post;
 
 import java.util.List;
@@ -12,5 +13,5 @@ public interface PostService {
     public void deletePost(Post post);
     public List<Post> getByTopic(String topic);
     public List<Post> searchPosts(String query);
-    public void updatePost(Long id, String title, String topic, String fullText);
+    public void updatePost(Long id, BlogPostUpdateRequest blogPostUpdateRequest);
 }

@@ -1,5 +1,6 @@
 package com.spring.springboot.blog.First_demo_blog.services.post;
 
+import com.spring.springboot.blog.First_demo_blog.dto.BlogPostUpdateRequest;
 import com.spring.springboot.blog.First_demo_blog.models.Post;
 import com.spring.springboot.blog.First_demo_blog.repo.PostRepository;
 import lombok.RequiredArgsConstructor;
@@ -55,15 +56,18 @@ public class PostServiceImpl implements PostService{
         return postRepository.findAllByTopic(topic);
     }
 
+
     @Override
-    public void updatePost(Long id, String title, String topic, String fullText) {
+    public void updatePost(Long id, BlogPostUpdateRequest blogPostUpdateRequest) {
+
         Post post = getPost(id);
 
-        post.setTitle(title);
-        post.setTopic(topic);
-        post.setFullText(fullText);
+        post.setTitle(blogPostUpdateRequest.getTitle());
+        post.setTopic(blogPostUpdateRequest.getTopic());
+        post.setFullText(blogPostUpdateRequest.getFullText());
 
         postRepository.save(post);
+
     }
 
     @Override

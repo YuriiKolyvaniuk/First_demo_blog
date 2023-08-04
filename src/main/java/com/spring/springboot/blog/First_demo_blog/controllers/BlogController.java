@@ -1,5 +1,6 @@
 package com.spring.springboot.blog.First_demo_blog.controllers;
 
+import com.spring.springboot.blog.First_demo_blog.dto.BlogPostUpdateRequest;
 import com.spring.springboot.blog.First_demo_blog.models.Post;
 import com.spring.springboot.blog.First_demo_blog.services.post.PostService;
 import lombok.RequiredArgsConstructor;
@@ -18,19 +19,17 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BlogController {
 
-    private static final List<String> TOPICS = Arrays.asList("World", "Technology", "Design"
-            , "Culture", "Business", "Politics", "Opinion"
-            , "Science", "Health", "Style", "Travel", "Other");
+    private static final List<String> TOPICS = Arrays.asList("World", "Technology", "Design", "Culture", "Business", "Politics", "Opinion", "Science", "Health", "Style", "Travel", "Other");
 
 
     private final PostService postService;
 
     @GetMapping
-    public String blogMain(Model model){
+    public String blogMain(Model model) {
 
         List<Post> posts = postService.getAllPosts();
 
-        model.addAttribute("posts",posts);
+        model.addAttribute("posts", posts);
 
         return "blog-main";
     }
@@ -55,7 +54,7 @@ public class BlogController {
     }
 
     @GetMapping("/{id}")
-    public String blogDetails(@PathVariable(value = "id") long id, Model model){
+    public String blogDetails(@PathVariable(value = "id") long id, Model model) {
         Post post = postService.getPost(id);
 
         model.addAttribute("post", post);
@@ -65,7 +64,7 @@ public class BlogController {
     }
 
     @GetMapping("/edit/{id}")
-    public String blogEdit(@PathVariable(value = "id") long id, Model model){
+    public String blogEdit(@PathVariable(value = "id") long id, Model model) {
         Post post = postService.getPost(id);
         model.addAttribute("post", post);
         model.addAttribute("topics", TOPICS);
@@ -74,19 +73,15 @@ public class BlogController {
     }
 
     @PostMapping("/edit/{id}")
-    public String blogPostUpdate(@PathVariable(value = "id") long id
-            , @RequestParam String title
-            , @RequestParam String topic
-            , @RequestParam String fullText
-            , Model model){
+    public String blogPostUpdate(@PathVariable(value = "id") long id, @RequestBody BlogPostUpdateRequest blogPostUpdateRequest) {
 
-        postService.updatePost(id,title,topic,fullText);
+        postService.updatePost(id, blogPostUpdateRequest);
 
         return "redirect:/blog";
     }
 
     @PostMapping("/remove/{id}")
-    public String blogRemove(@PathVariable(value = "id") long id, Model model){
+    public String blogRemove(@PathVariable(value = "id") long id) {
         postService.deletePost(id);
 
         return "redirect:/blog";
@@ -97,7 +92,7 @@ public class BlogController {
         if (TOPICS.stream().anyMatch(t -> t.equalsIgnoreCase(topic))) {
             List<Post> posts = postService.getByTopic(topic);
             model.addAttribute("topic", topic);
-            model.addAttribute("posts",posts);
+            model.addAttribute("posts", posts);
 
             return "blog-topic";
 
