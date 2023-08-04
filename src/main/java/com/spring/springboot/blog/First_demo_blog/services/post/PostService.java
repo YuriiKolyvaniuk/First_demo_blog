@@ -12,4 +12,5 @@ public interface PostService {
     public void deletePost(Post post);
     public List<Post> getByTopic(String topic);
     public List<Post> searchPosts(String query);
+    public void updatePost(Long id, String title, String topic, String fullText);
 }

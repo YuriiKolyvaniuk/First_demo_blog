@@ -76,9 +76,11 @@
             <div class="text-end">
                 <b><span class="good_feedback">Good:</span></b> <span th:text="${post.goodGrade}"
                                                                       class="good_feedback"/>
-                <b><span class="bad_feedback">Bad:</span></b> <span th:text="${post.badGrade}" class="bad_feedback"/>
+                <b><span class="bad_feedback">Bad:</span></b> <span th:text="${post.badGrade}"
+                                                                      class="bad_feedback"/>
             </div>
-            <div sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')">
+
+            <div sec:authorize="hasAnyRole('ADMIN', 'MODERATOR')">
                 <a th:href="'/blog/edit/' + ${post.id}" class="btn btn-warning">Edit</a>
                 <form th:action="'/blog/remove/' + ${post.id}" method="post" style="display: inline-block;">
                     <button class="btn btn-danger" type="submit">Delete</button>

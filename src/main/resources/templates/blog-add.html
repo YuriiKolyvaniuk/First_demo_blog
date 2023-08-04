@@ -25,7 +25,7 @@
     <br>
     <div class="form-group">
       <textarea name="full_text" placeholder="Write your post here" class="form-control"></textarea>
-      <small th:if="${#fields.hasErrors('full_text')}" th:errors="*{fullText}" class="text-danger"></small>
+      <small th:if="${#fields.hasErrors('fullText')}" th:errors="*{fullText}" class="text-danger"></small>
     </div>
     <br>
     <button type="submit" class="btn btn-success">Add</button>

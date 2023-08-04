@@ -4,7 +4,6 @@ import com.spring.springboot.blog.First_demo_blog.models.Post;
 import com.spring.springboot.blog.First_demo_blog.repo.PostRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -57,7 +56,18 @@ public class PostServiceImpl implements PostService{
     }
 
     @Override
+    public void updatePost(Long id, String title, String topic, String fullText) {
+        Post post = getPost(id);
+
+        post.setTitle(title);
+        post.setTopic(topic);
+        post.setFullText(fullText);
+
+        postRepository.save(post);
+    }
+
+    @Override
     public List<Post> searchPosts(String query) {
-        return postRepository.findAllByTitleContainingIgnoreCaseOrTopicContainingIgnoreCase(query, query);
+        return postRepository.searchPosts(query, query);
     }
 }
