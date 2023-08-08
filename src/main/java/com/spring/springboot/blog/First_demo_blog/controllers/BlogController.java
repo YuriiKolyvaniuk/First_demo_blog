@@ -73,7 +73,8 @@ public class BlogController {
     }
 
     @PostMapping("/edit/{id}")
-    public String blogPostUpdate(@PathVariable(value = "id") long id, @RequestBody BlogPostUpdateRequest blogPostUpdateRequest) {
+    public String blogPostUpdate(@PathVariable(value = "id") long id,@Validated @ModelAttribute BlogPostUpdateRequest blogPostUpdateRequest) {
+
 
         postService.updatePost(id, blogPostUpdateRequest);
 
