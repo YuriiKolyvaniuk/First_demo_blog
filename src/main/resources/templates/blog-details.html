@@ -9,6 +9,34 @@
 
 <header th:insert="blocks/header :: header"/>
 
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const copyButton = document.getElementById('copyButton');
+        const successMessage = document.getElementById('successMessage');
+
+        if (copyButton && successMessage) {
+            copyButton.addEventListener('click', async () => {
+                const currentUrl = window.location.href;
+
+                try {
+                    await navigator.clipboard.writeText(currentUrl);
+                    console.log('URL copied to clipboard:', currentUrl);
+
+                    // Show success message
+                    successMessage.textContent = 'URL copied successfully!';
+                    setTimeout(() => {
+                        successMessage.textContent = ''; // Clear the message after a few seconds
+                    }, 3000); // Display for 3 seconds
+                } catch (error) {
+                    console.error('Failed to copy URL to clipboard:', error);
+                }
+            });
+        } else {
+            console.error('Copy button or success message element not found.');
+        }
+    });
+</script>
+
 <style>
     .container {
         position: relative;
@@ -37,28 +65,6 @@
         color: red;
     }
 </style>
-
-<script th:inline="javascript">
-    function handleButtonClick(action) {
-        if (isUserAuthenticated()) {
-            // Операції, які виконуються при натисканні кнопок для авторизованих користувачів
-            if (action === 'like') {
-
-            } else if (action === 'dislike') {
-                // Код для кнопки Dislike
-            } else if (action === 'share') {
-                // Код для кнопки Share
-            }
-        } else {
-            // Операції, які виконуються при натисканні кнопок для неавторизованих користувачів
-            alert('You need to login to perform this action.');
-        }
-    }
-
-    function isUserAuthenticated() {
-
-    }
-</script>
 
 <div>
     <div class="container mt-5">
@@ -91,11 +97,13 @@
 
         <div class="button-group">
             <button type="button" class="btn btn-secondary" style="background-color: limegreen; border: none"
-                    onclick="handleButtonClick('like')">Like</button>
+                    >Like</button>
             <button type="button" class="btn btn-secondary" style="background-color: red; border: none"
-                    onclick="handleButtonClick('dislike')">Dislike</button>
+                    >Dislike</button>
             <button type="button" class="btn btn-secondary" style="background-color: orange; border: none"
-                    onclick="handleButtonClick('share')">Share</button>
+                    id="copyButton" >Copy</button>
+            <div id="successMessage" class="text-success" style="text-align: center"></div>
+
         </div>
     </div>
 </div>

@@ -21,8 +21,9 @@
                         </div>
                     </form>
                     <div class="ml-3" style="margin-left: 1rem">
-                        <div sec:authorize="isAnonymous()">
-                            <button class="btn btn-light" onclick="window.location.href='/login'">Sign in</button>
+                        <div sec:authorize="isAnonymous()" class="d-flex ">
+                            <button class="btn btn-light" style="margin-right: .5rem; white-space: nowrap" onclick="window.location.href='/login'">Sign in</button>
+                            <button class="btn btn-info" style="white-space: nowrap" onclick="window.location.href='/signup'">Sign up</button>
                         </div>
                         <div sec:authorize="hasAnyRole('ROLE_USER','ROLE_ADMIN', 'ROLE_MODERATOR')">
                             <div class="drop-menu">
