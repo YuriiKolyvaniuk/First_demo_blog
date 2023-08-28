@@ -1,6 +1,6 @@
-package com.spring.springboot.blog.First_demo_blog.repo;
+package com.spring.springboot.blog.First_demo_blog.domain.user.repository;
 
-import com.spring.springboot.blog.First_demo_blog.models.User;
+import com.spring.springboot.blog.First_demo_blog.domain.user.persistence.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 

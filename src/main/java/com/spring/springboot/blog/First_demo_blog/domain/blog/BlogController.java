@@ -1,8 +1,10 @@
-package com.spring.springboot.blog.First_demo_blog.controllers;
+package com.spring.springboot.blog.First_demo_blog.domain.blog;
 
-import com.spring.springboot.blog.First_demo_blog.dto.BlogPostUpdateRequest;
-import com.spring.springboot.blog.First_demo_blog.models.Post;
-import com.spring.springboot.blog.First_demo_blog.services.post.PostService;
+import com.spring.springboot.blog.First_demo_blog.domain.blog.dto.BlogListResponse;
+import com.spring.springboot.blog.First_demo_blog.domain.blog.dto.BlogPostUpdateRequest;
+import com.spring.springboot.blog.First_demo_blog.domain.blog.presistence.Post;
+import com.spring.springboot.blog.First_demo_blog.domain.blog.service.PostService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Arrays;
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/blog")
 @Validated
 @RequiredArgsConstructor
@@ -24,15 +26,20 @@ public class BlogController {
 
     private final PostService postService;
 
-    @GetMapping
-    public String blogMain(Model model) {
-
-        List<Post> posts = postService.getAllPosts();
-
-        model.addAttribute("posts", posts);
-
-        return "blog-main";
+    @GetMapping()
+    public BlogListResponse list(){
+        return postService.getAllPosts();
     }
+
+//    @GetMapping
+//    public String blogMain(Model model) {
+//
+//        List<Post> posts = postService.getAllPosts();
+//
+//        model.addAttribute("posts", posts);
+//
+//        return "blog-main";
+//    }
 
     @GetMapping("/add")
     public String blogAdd(Model model) {
@@ -73,7 +80,7 @@ public class BlogController {
     }
 
     @PostMapping("/edit/{id}")
-    public String blogPostUpdate(@PathVariable(value = "id") long id,@Validated @ModelAttribute BlogPostUpdateRequest blogPostUpdateRequest) {
+    public String blogPostUpdate(@PathVariable(value = "id") long id,@Valid @RequestBody BlogPostUpdateRequest blogPostUpdateRequest) {
 
 
         postService.updatePost(id, blogPostUpdateRequest);
@@ -105,7 +112,7 @@ public class BlogController {
 
     @GetMapping("/search")
     public String search(@RequestParam("query") String query, Model model) {
-        List<Post> searchResults = postService.searchPosts(query);
+        List<Post> searchResults = postService.getAllPosts(query);
         if (searchResults.isEmpty()) {
             return "not-found";
         }

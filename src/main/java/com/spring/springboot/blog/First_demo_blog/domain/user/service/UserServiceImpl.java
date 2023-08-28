@@ -1,12 +1,11 @@
-package com.spring.springboot.blog.First_demo_blog.services.user;
+package com.spring.springboot.blog.First_demo_blog.domain.user.service;
 
 
-import com.spring.springboot.blog.First_demo_blog.models.User;
-import com.spring.springboot.blog.First_demo_blog.models.enums.Role;
-import com.spring.springboot.blog.First_demo_blog.repo.UserRepository;
+import com.spring.springboot.blog.First_demo_blog.domain.user.persistence.User;
+import com.spring.springboot.blog.First_demo_blog.core.enums.Role;
+import com.spring.springboot.blog.First_demo_blog.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 

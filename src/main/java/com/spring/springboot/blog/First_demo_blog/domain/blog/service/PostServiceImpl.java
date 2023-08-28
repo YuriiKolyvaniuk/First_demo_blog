@@ -1,8 +1,9 @@
-package com.spring.springboot.blog.First_demo_blog.services.post;
+package com.spring.springboot.blog.First_demo_blog.domain.blog.service;
 
-import com.spring.springboot.blog.First_demo_blog.dto.BlogPostUpdateRequest;
-import com.spring.springboot.blog.First_demo_blog.models.Post;
-import com.spring.springboot.blog.First_demo_blog.repo.PostRepository;
+import com.spring.springboot.blog.First_demo_blog.domain.blog.dto.BlogListResponse;
+import com.spring.springboot.blog.First_demo_blog.domain.blog.dto.BlogPostUpdateRequest;
+import com.spring.springboot.blog.First_demo_blog.domain.blog.presistence.Post;
+import com.spring.springboot.blog.First_demo_blog.domain.blog.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Slf4j
 @RequiredArgsConstructor
 public class PostServiceImpl implements PostService{
 
@@ -19,8 +19,20 @@ public class PostServiceImpl implements PostService{
     private final PostRepository postRepository;
 
     @Override
-    public List<Post> getAllPosts() {
-        return postRepository.findAll();
+    public BlogListResponse getAllPosts() {
+        List<Post> allPosts = postRepository.findAll();
+        List<BlogListResponse.Blog> blocks = allPosts.stream().map(post -> {
+            BlogListResponse.Blog blog = new BlogListResponse.Blog();
+            blog.setId(post.getId());
+            blog.setTitle(post.getTitle());
+            blog.setTopic(post.getTopic());
+            blog.setFullText(post.getFullText());
+            blog.setGoodGrade(post.getGoodGrade());
+            blog.setBadGrade(post.getBadGrade());
+
+            return blog;
+        }).toList();
+        return BlogListResponse.builder().data(blocks).build();
     }
 
     @Override
@@ -47,11 +59,6 @@ public class PostServiceImpl implements PostService{
     }
 
     @Override
-    public void deletePost(Post post) {
-        postRepository.delete(post);
-    }
-
-    @Override
     public List<Post> getByTopic(String topic) {
         return postRepository.findAllByTopic(topic);
     }
@@ -71,7 +78,7 @@ public class PostServiceImpl implements PostService{
     }
 
     @Override
-    public List<Post> searchPosts(String query) {
+    public List<Post> getAllPosts(String query) {
         return postRepository.searchPosts(query, query);
     }
 }

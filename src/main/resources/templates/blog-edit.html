@@ -17,6 +17,7 @@
     <div th:each="el : ${post}">
         <form method="post">
             <input type="text" th:value="${el.title}" name="title" placeholder="Enter name of post" class="form-control">
+            <small th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="text-danger"></small>
             <br>
             <div class="form-group">
                 <select name="topic" class="form-control">
@@ -25,6 +26,7 @@
             </div>
             <br>
             <textarea name="fullText" placeholder="Write your post here" class="form-control" th:text="${el.fullText}"/>
+            <small th:if="${#fields.hasErrors('fullText')}" th:errors="*{post.fullText}" class="text-danger"></small>
             <br>
             <button type="submit" class="btn btn-success">Update</button>
         </form>

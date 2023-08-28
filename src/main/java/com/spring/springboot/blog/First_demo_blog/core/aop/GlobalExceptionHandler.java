@@ -1,4 +1,4 @@
-package com.spring.springboot.blog.First_demo_blog.aop;
+package com.spring.springboot.blog.First_demo_blog.core.aop;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;

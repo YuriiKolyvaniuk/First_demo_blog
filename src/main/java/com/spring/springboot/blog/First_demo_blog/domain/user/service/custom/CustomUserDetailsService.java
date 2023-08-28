@@ -1,8 +1,7 @@
-package com.spring.springboot.blog.First_demo_blog.services.user.custom;
+package com.spring.springboot.blog.First_demo_blog.domain.user.service.custom;
 
-import com.spring.springboot.blog.First_demo_blog.repo.UserRepository;
+import com.spring.springboot.blog.First_demo_blog.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

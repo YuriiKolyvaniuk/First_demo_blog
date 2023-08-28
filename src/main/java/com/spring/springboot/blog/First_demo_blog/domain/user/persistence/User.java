@@ -1,10 +1,9 @@
-package com.spring.springboot.blog.First_demo_blog.models;
+package com.spring.springboot.blog.First_demo_blog.domain.user.persistence;
 
-import com.spring.springboot.blog.First_demo_blog.models.enums.Role;
+import com.spring.springboot.blog.First_demo_blog.core.enums.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,7 +11,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "users")

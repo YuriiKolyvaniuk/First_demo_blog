@@ -1,4 +1,4 @@
-package com.spring.springboot.blog.First_demo_blog.models;
+package com.spring.springboot.blog.First_demo_blog.domain.blog.presistence;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
