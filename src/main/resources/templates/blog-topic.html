@@ -11,7 +11,7 @@
 
 <div class="container mt-5">
 
-  <h1>Founded posts by your topic: <span th:text="${topic}"></span></h1>
+  <h1>Founded blogs by your topic: <span th:text="${topic}"></span></h1>
 
   <style>
     .container {
@@ -34,21 +34,21 @@
     }
   </style>
 
-  <div th:if="${posts.empty}" class="alert alert-info mt-2">
-    <p>Unfortunately, no posts were found.</p>
+  <div th:if="${blogs.empty}" class="alert alert-info mt-2">
+    <p>Unfortunately, no blogs were found.</p>
   </div>
 
-  <div th:each="post : ${posts}" class="alert alert-info mt-2">
+  <div th:each="blog : ${blogs}" class="alert alert-info mt-2">
 
-    <h3 th:text="${post.title}"/>
-    <p th:text="${post.topic}"/>
+    <h3 th:text="${blog.title}"/>
+    <p th:text="${blog.topic}"/>
     <br>
     <div class="actions">
       <div class="text-end">
-        <b><span class="good_feedback">Good:</span></b> <span th:text="${post.goodGrade}" class="good_feedback" />
-        <b><span class="bad_feedback">Bad:</span></b> <span th:text="${post.badGrade}" class="bad_feedback" />
+        <b><span class="good_feedback">Good:</span></b> <span th:text="${blog.goodGrade}" class="good_feedback" />
+        <b><span class="bad_feedback">Bad:</span></b> <span th:text="${blog.badGrade}" class="bad_feedback" />
       </div>
-      <a th:href="'/blog/' + ${post.id}"class="btn btn-warning">More info</a>
+      <a th:href="'/blog/' + ${blog.id}"class="btn btn-warning">More info</a>
     </div>
 
   </div>

@@ -10,10 +10,10 @@
 <header th:insert="blocks/header :: header"/>
 
 <div class="container mt-5 mb-5">
-  <h1>Adding post</h1>
-  <form action="/blog/add" method="post" th:object="${post}">
+  <h1>Adding blog</h1>
+  <form action="/blog/add" method="blog" th:object="${blog}">
     <div class="form-group">
-      <input type="text" th:field="*{title}" placeholder="Enter name of post" class="form-control">
+      <input type="text" th:field="*{title}" placeholder="Enter name of blog" class="form-control">
       <small th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="text-danger"></small>
     </div>
     <br>
@@ -24,7 +24,7 @@
     </div>
     <br>
     <div class="form-group">
-      <textarea name="fullText" placeholder="Write your post here" class="form-control"></textarea>
+      <textarea name="fullText" placeholder="Write your blog here" class="form-control"></textarea>
       <small th:if="${#fields.hasErrors('fullText')}" th:errors="*{fullText}" class="text-danger"></small>
     </div>
     <br>
