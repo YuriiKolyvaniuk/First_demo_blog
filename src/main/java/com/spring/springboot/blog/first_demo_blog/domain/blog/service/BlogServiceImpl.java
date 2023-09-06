@@ -42,7 +42,6 @@ public class BlogServiceImpl implements BlogService {
 
     public BlogGetResponse get(Long id) {
         Blog blog = getRaw(id, false);
-
         return blogMapper.toGetResponse(blog);
     }
 
