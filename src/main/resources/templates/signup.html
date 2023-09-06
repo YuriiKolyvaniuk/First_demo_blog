@@ -14,7 +14,7 @@
       <div class="mt-5">
         <div class="card-body">
           <h2 class="card-title" style="margin-bottom: 10px">Sign Up</h2>
-          <form th:action="@{/signup}" method="post" th:object="${user}">
+          <form th:action="@{/signup}" method="blog" th:object="${user}">
             <div style="display: flex; row-gap: 10px; flex-direction: column; margin-bottom: 16px">
               <input type="text" placeholder="Username" class="form-control" id="username" name="username" required style="padding: 10px">
               <span th:if="${usernameError}" class="text-danger" th:text="${usernameError}"></span>

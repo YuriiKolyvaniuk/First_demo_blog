@@ -70,25 +70,25 @@
     <div class="container mt-5">
         <h1>Blog of this site.</h1>
 
-        <div class="alert alert-info mt-2 post-container">
-            <h2 th:text="${post.title}"/>
-            <h5 th:text="${post.topic}"/>
+        <div class="alert alert-info mt-2 blog-container">
+            <h2 th:text="${blog.title}"/>
+            <h5 th:text="${blog.topic}"/>
             <br>
-            <p th:text="${post.fullText}"
+            <p th:text="${blog.fullText}"
                style="overflow-wrap: break-word; margin-bottom: 4rem"/>
         </div>
 
         <div class="actions">
             <div class="text-end">
-                <b><span class="good_feedback">Good:</span></b> <span th:text="${post.goodGrade}"
+                <b><span class="good_feedback">Good:</span></b> <span th:text="${blog.goodGrade}"
                                                                       class="good_feedback"/>
-                <b><span class="bad_feedback">Bad:</span></b> <span th:text="${post.badGrade}"
+                <b><span class="bad_feedback">Bad:</span></b> <span th:text="${blog.badGrade}"
                                                                       class="bad_feedback"/>
             </div>
 
             <div sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')">
-                <a th:href="'/blog/edit/' + ${post.id}" class="btn btn-warning">Edit</a>
-                <form th:action="'/blog/remove/' + ${post.id}" method="post" style="display: inline-block;">
+                <a th:href="'/blog/edit/' + ${blog.id}" class="btn btn-warning">Edit</a>
+                <form th:action="'/blog/remove/' + ${blog.id}" method="blog" style="display: inline-block;">
                     <button class="btn btn-danger" type="submit">Delete</button>
                 </form>
             </div>
